@@ -1,0 +1,206 @@
+   /* @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Roboto+Flex:opsz,wght@8..144,200;8..144,300;8..144,400;8..144,500;8..144,600;8..144,700;8..144,800;8..144,900;8..144,1000&display=swap'); */
+   @import url('https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css');
+
+*{
+  box-sizing: border-box;
+}
+html{
+  height: 100%;
+}
+
+body{
+	margin:0;
+	height:100%;
+	background: #eee;
+	font-size:14px;
+	font-weight: 400;
+}
+/* form login */
+.form-row{
+  display: flex;
+}
+.btn-login{
+  background-color: #8ec9f9;
+  border-radius: 5px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+}
+.btn-login:hover{
+  opacity: 0.8;
+}
+a:hover{
+	text-decoration: none !important;
+}
+.input-text{
+	-webkit-transition: all .2s ease-out;
+    transition: all .2s ease-out;
+    -webkit-transition-property: color,-webkit-box-shadow;
+    transition-property: color,-webkit-box-shadow;
+    transition-property: box-shadow,color;
+    transition-property: box-shadow,color,-webkit-box-shadow;
+    -webkit-box-shadow: inset 0 1px 0 0 rgba(63,63,68,.05);
+    box-shadow: inset 0 1px 0 0 rgba(63,63,68,.05);
+    border: 1px solid #c4cdd5;
+    outline: none;
+    height: 42px;
+    -webkit-box-shadow: inset 0 1px 0 0 rgba(63,63,68,.05);
+    /* box-shadow: inset 0 1px 0 0 rgba(63,63,68,.05); */
+    border-radius: 5px;
+	width:100%;
+	outline:0;
+	padding:10px;
+}
+
+.input-text:focus{
+	border-color: rgb(132,90,223);
+	outline:0;
+}
+
+.uk-button{
+	margin-bottom: 0 !important;
+    font-size: 13px;
+    border-radius: 4px;
+    height: 32px;
+    box-shadow: 0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12);
+}
+
+.input-checkbox{
+	margin:0 10px 0 0;
+}
+.mb-20{
+	margin-bottom:20px;
+}
+.mb-5{
+	margin-bottom:5px;
+}
+.mb-10{
+	margin-bottom:10px;
+}
+
+#app{
+	height:100%;
+}
+.img-cover img{
+	width:100%;
+	height:100%;
+	object-fit: cover;
+}
+/* dashboard */
+.dashboard{
+	height:100%;
+}
+
+ul{
+	list-style: none;
+	padding:0;
+	margin:0;
+}
+
+
+.app-sidebar .uk-icon{
+	color:#a3aed1 !important;
+}
+
+
+/* layout */
+.page-wrapper{
+  margin-left: 260px;
+}
+.navbar{
+  background-color: #fff;
+  padding: 20px;
+}
+.btn-menu{
+  border: none;
+    background-color: #fff;
+}
+.icon-logout{
+  color: #000;
+}
+.link-logout{
+  color: #000;
+  font-weight: 600;
+}
+.navbar-top-link{
+  display: flex;
+}
+.notice{
+  margin-right: 20px;
+}
+.bg-secondary{
+  position: relative;
+    top: -8px;
+    left: -10px;
+    background-color: #eee;
+    border-radius: 50%;
+    padding: 1px 6px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* content*/
+.ibox{
+  border-radius: 5px;
+  border: 0;
+  background: #fff;
+  box-shadow:  0 0.125rem 0 rgba(10, 10, 10, 0);
+}
+
+.item-heading{
+  margin-top: 5px;
+  font-size: 20px;
+  margin-left: 20px;
+  color: #aaa;
+  font-weight: 500;
+}
+
+.line{
+  background-color: #eee;
+  padding-top: 20px;
+}
+
+.widget-icon{
+  font-size: 16px;
+  margin-right: 20px;
+  cursor: pointer;
+}
+.ibox-table{
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+.btn{
+  font-size: 20px;
+  color: #fff;
+  padding: 0px 4px;
+  border-radius: 5px;
+}
+.btn-success{
+  background-color: #07bc0c;
+  
+}
+.btn-success:hover{
+  background-color: #23cb29;
+  color: #fff;
+}
+.btn-warning{
+  background-color: #ffe143;
+  margin: 0 4px;
+}
+.btn-warning:hover{
+  background-color: #fadf5a;
+  color: #fff;
+}
+.btn-danger{
+  background-color: #F44336;
+}
+.btn-danger:hover{
+  background-color: #f15a4f;
+  color: #fff;
+}
