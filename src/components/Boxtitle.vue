@@ -1,7 +1,10 @@
+<script setup>
+    const {boxTitle} = defineProps(['boxTitle']);
+</script>
 <template>
     <div class="ibox-title">           
         <div class="uk-flex uk-flex-middle uk-flex-between">
-            <h3 class="item-heading">Danh sách phòng ban</h3>
+            <h3 class="item-heading">{{ boxTitle }}</h3>
             <span class="widget-icon">
                 <i class="bx bx-cog"></i>
                 Tác vụ khác
