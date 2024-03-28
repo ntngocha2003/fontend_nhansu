@@ -23,7 +23,7 @@ const router = createRouter({
     // Department
 
     {path: '/department/index',name: 'department.index',component: DepartmentIndex,meta: {middleware:[authMiddleware]}},
-    {path: '/department/store',name: 'department.store',component: DepartmentStore,meta: {middleware:[authMiddleware]}},
+    {path: '/department/create',name: 'department.create',component: DepartmentStore,meta: {middleware:[authMiddleware]}},
     // {path: '/department/update',name: 'department.update',component: DepartmentUpdate},
     // {path: '/department/delete',name: 'department.delete',component: DepartmentDelete},
 

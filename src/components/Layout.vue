@@ -53,6 +53,6 @@
 <style scoped>
     .page-container{     
         background-color: #fff;
-        margin-top: 20px;
+        margin-top: 10px;
     }
 </style>

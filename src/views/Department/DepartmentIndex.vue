@@ -5,25 +5,20 @@
   import BoxFilter from '@/components/BoxFilter.vue'
   import Table from '@/components/Table.vue'
   import {ref} from 'vue'
-
+ 
   const itemTitle= ref('Quản lý phòng ban')
   const boxTitle= ref('Danh sách phòng ban')
   const boxFilter= ref({
     createText:'Thêm mới phòng ban',
-    createLink:'/department/store'
+    createLink:'/department/create'
   })
   const table= ref({
-    thead:['Tên phòng ban','Mô tả'],
-    data:[
-        {
-            name:"Phòng quản lý",
-            description:" Phòng này quản lý công ty"
-        }
-    ],
-    // route:{
-    //     update:'/department/update',
-    //     delete:'/department/delete'
-    // },
+    content:{
+        name:['Tên phòng ban','Mô tả'],
+        value:['nameDepartment','description']
+    },
+    data:[],
+   
     actions:[
         {
             class:'btn btn-warning ml10' ,
@@ -38,6 +33,8 @@
     ]
   })
 
+  const endpoint=ref('/Departments')
+
 </script>
 
 <template>
@@ -50,7 +47,7 @@
                     <Boxtitle :boxTitle="boxTitle"></Boxtitle>
                     <div class="ibox-content">  
                         <BoxFilter :boxFilter="boxFilter"></BoxFilter>        
-                        <Table :table="table"></Table>
+                        <Table :table="table" :endpoint="endpoint"></Table>
                     </div>
                 </div>
             </div>

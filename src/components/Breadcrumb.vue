@@ -20,7 +20,7 @@
 
 <style scoped>
     .page-breadcrumb{
-        padding: 30px 20px;
+        padding: 20px 20px;
         background-color: #fff;
         border-bottom: 1px solid #e7eaec;
     }

@@ -28,7 +28,7 @@ const actions= {
               email,
               password
           })
-         
+        
           localStorage.setItem('token',response.data.token);
           localStorage.setItem('token_expires',response.data.token_expires_at)
           commit ('loginAdmin',{authCheck:true,token:response.data.token, user:response.admin})

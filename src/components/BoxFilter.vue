@@ -11,7 +11,7 @@
                         <div class="filter-search">
                             <input
                                 type="text"                             
-                                class="form-control uk-input"
+                                class="form-control uk-input input-search"
                                 placeholder="Nhập từ khóa cần tìm kiếm"
                             />                    
                             <button class="uk-button-primary btn-search"><i class="bx bx-search"></i></button>
@@ -23,3 +23,11 @@
         </form>               
     </div>
 </template>
+
+<style scoped>
+
+    .input-search{
+        height: 35px;
+        border-radius: 5px;
+    }
+</style>
