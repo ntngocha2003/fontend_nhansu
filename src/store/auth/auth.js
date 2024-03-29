@@ -1,5 +1,4 @@
 import axios from '@/config/axios.js';
-import csrf from '@/config/csrf';
 
 const state={
         authCheck: false,
@@ -23,7 +22,7 @@ const getters={
 const actions= {
   
           async loginAdmin ({commit},{email,password}) {
-          // await csrf.getCookie()
+         
           const response =await axios.post('/login',{
               email,
               password

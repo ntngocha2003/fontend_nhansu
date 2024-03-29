@@ -34,6 +34,11 @@
   })
 
   const endpoint=ref('/Departments')
+  const model=ref('Department')
+  const tasks=ref({
+    deleteMultiple:'/department/deleteMultiple',
+    deleteId:'/department/delete'
+  })
 
 </script>
 
@@ -44,10 +49,10 @@
             <div class="line"></div>
             <div class="page-content">
                 <div class="ibox">
-                    <Boxtitle :boxTitle="boxTitle"></Boxtitle>
+                    <Boxtitle :boxTitle="boxTitle":model="model"></Boxtitle>
                     <div class="ibox-content">  
                         <BoxFilter :boxFilter="boxFilter"></BoxFilter>        
-                        <Table :table="table" :endpoint="endpoint"></Table>
+                        <Table :table="table" :endpoint="endpoint" :model="model" :tasks="tasks"></Table>
                     </div>
                 </div>
             </div>

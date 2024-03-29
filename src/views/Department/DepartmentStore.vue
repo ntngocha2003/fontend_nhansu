@@ -1,6 +1,6 @@
 <script setup>
   import axios from '@/config/axios.js';
-  import {ref} from 'vue'
+  import {ref,onMounted} from 'vue'
   import Layout from '@/components/Layout.vue'
   import Breadcrumb from '@/components/Breadcrumb.vue'
   import { useRouter } from 'vue-router';
@@ -18,9 +18,22 @@
     const nameError = ref('')
     const descriptionError = ref('')
 
-  const create = async()=>{
+    const url=router.currentRoute.value.name.split('.')
+    const action=url[url.length-1]
+    const id=router.currentRoute.value.params.id;
+   
+
+  const save = async()=>{
     try {
-        const response=await axios.post('/storeDepartment',formData.value)
+        let response
+        if(action==='update'){          
+            response=await axios.put('/department/update/'+id,formData.value)
+
+            console.log(response)
+        }
+        else if(action==='create'){
+            response=await axios.post('/department/store/',formData.value)
+        }
         store.dispatch('toast/showMessage',{message:response.data.message, type:'success'})
         router.push({name: 'department.index'})
        
@@ -37,6 +50,25 @@
     }
   }
 
+  const identifyAction= async()=>{
+    if(action==='update'){
+        
+        
+            try {
+                const response=await axios.get('/departments/' +id)
+                formData.value.nameDepartment=response.data.data.nameDepartment
+                formData.value.description=response.data.data.description
+            } catch (error) {
+                console.log(error)
+            }
+        
+    }
+    
+  }
+  onMounted(()=>{
+    identifyAction()
+  })
+
 </script>
 
 <template>
@@ -45,7 +77,7 @@
             <Breadcrumb :itemTitle="itemTitle"></Breadcrumb>
             <div class="line"></div>
             <div class="" style="background-color: #eeeeeeb5;padding: 20px 10px;">
-                <form @submit.prevent="create" action="">
+                <form @submit.prevent="save()" action="">
                     <div uk-gird class="gird">
                         <div class="uk-width-2-5@m">
                             <div class="panel-card">

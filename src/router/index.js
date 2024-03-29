@@ -7,8 +7,7 @@ import Layout from '@/components/Layout.vue'
 import Dashboard from '@/views/Dashboard.vue'
 import DepartmentIndex from '@/views/Department/DepartmentIndex.vue'
 import DepartmentStore from '@/views/Department/DepartmentStore.vue'
-// import DepartmentUpdate from '@/views/Department/DepartmentUpdate.vue'
-// import DepartmentDelete from '@/views/Department/DepartmentDelete.vue'
+import DepartmentDelete from '@/views/Department/DepartmentDelete.vue'
 // import EmployeeDelete from '@/views/Employee/EmployeeDelete.vue'
 // import EmployeeIndex from '@/views/Employee/EmployeeIndex.vue'
 // import EmployeeStore from '@/views/Employee/EmployeeStore.vue'
@@ -24,8 +23,8 @@ const router = createRouter({
 
     {path: '/department/index',name: 'department.index',component: DepartmentIndex,meta: {middleware:[authMiddleware]}},
     {path: '/department/create',name: 'department.create',component: DepartmentStore,meta: {middleware:[authMiddleware]}},
-    // {path: '/department/update',name: 'department.update',component: DepartmentUpdate},
-    // {path: '/department/delete',name: 'department.delete',component: DepartmentDelete},
+    {path: '/department/update/:id',name: 'department.update',component: DepartmentStore,meta: {middleware:[authMiddleware]}},
+    {path: '/department/delete/:id',name: 'department.delete',component: DepartmentDelete,meta: {middleware:[authMiddleware]}},
 
 
     // {path: '/employee/index',name: '/employee.index',component: EmployeeIndex},
