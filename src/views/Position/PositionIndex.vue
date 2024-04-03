@@ -6,15 +6,15 @@
   import Table from '@/components/Table.vue'
   import {ref} from 'vue'
  
-  const itemTitle= ref('Quản lý phòng ban')
-  const boxTitle= ref('Danh sách phòng ban')
+  const itemTitle= ref('Quản lý chức vụ')
+  const boxTitle= ref('Danh sách chức vụ')
   const boxFilter= ref({
-    createText:'Thêm mới phòng ban',
-    createLink:'/department/create'
+    createText:'Thêm mới chức vụ',
+    createLink:'/position/create'
   })
   const table= ref({
     content:{
-        name:['Tên phòng ban','Số nhân viên','Mô tả'],
+        name:['Tên chức vụ','Số nhân viên','Mô tả'],
         value:['name','employees_count','description']
     },
     data:[],
@@ -23,22 +23,21 @@
         {
             class:'btn btn-warning ml10' ,
             icon:'bx bxs-calendar-edit',
-            route:'/department/update'
+            route:'/position/update'
         },
         {
             class:'btn btn-danger ml10' ,
             icon:'bx bxs-trash',
-            route:'/department/delete'
+            route:'/position/delete'
         }
     ]
   })
 
- 
-  const endpoint=ref('/Departments')
-  const model=ref('Department')
+  const endpoint=ref('/Positions')
+  const model=ref('Position')
   const tasks=ref({
-    deleteMultiple:'/department/deleteMultiple',
-    deleteId:'/department/delete'
+    deleteMultiple:'/position/deleteMultiple',
+    deleteId:'/position/delete'
   })
 
 </script>

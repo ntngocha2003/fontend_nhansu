@@ -9,7 +9,7 @@
   const router=useRouter();
   const store=useStore();
 
-  const itemTitle= ref('Thêm mới phòng ban')
+  const itemTitle= ref('Thêm mới chức vụ')
   const formData=ref({
     name:'',
     description:''
@@ -27,13 +27,13 @@
     try {
         let response
         if(action==='update'){          
-            response=await axios.put('/department/update/'+id,formData.value)
+            response=await axios.put('/position/update/'+id,formData.value)
         }
         else if(action==='create'){
-            response=await axios.post('/department/store/',formData.value)
+            response=await axios.post('/position/store/',formData.value)
         }
         store.dispatch('toast/showMessage',{message:response.data.message, type:'success'})
-        router.push({name: 'department.index'})
+        router.push({name: 'position.index'})
        
     } catch (error) {
         console.log(error)
@@ -50,9 +50,9 @@
 
   const identifyAction= async()=>{
     if(action==='update'){ 
-        itemTitle.value='Cập nhật phòng ban' 
+        itemTitle.value='Cập nhật chức vụ' 
             try {
-                const response=await axios.get('/department/' +id)
+                const response=await axios.get('/position/' +id)
                 formData.value.name=response.data.data.name
                 formData.value.description=response.data.data.description
             } catch (error) {
@@ -81,7 +81,7 @@
                             </div>
                             <div class="panel-body">
                                 <div>
-                                    Nhập thông tin phòng ban
+                                    Nhập thông tin chức vụ
                                 </div>
                                 <div>
                                     Lưu ý những trường có dấu 
@@ -96,7 +96,7 @@
                                         <div class="uk-width-1-2@m uk-first">
                                             <div class="form-row">
                                                 <div class="label">
-                                                    Nhập tên phòng ban (*)
+                                                    Nhập tên chức vụ (*)
                                                 </div>
                                             </div>
                                             <input 
@@ -110,7 +110,7 @@
                                         <div class="uk-width-1-2@m">
                                             <div class="form-row">
                                                 <div class="label">
-                                                    Nhập mô tả phòng ban (*)
+                                                    Nhập mô tả chức vụ (*)
                                                 </div>
                                             </div>
                                             <input 

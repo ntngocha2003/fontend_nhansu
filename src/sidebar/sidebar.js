@@ -9,15 +9,18 @@ const sidebar=[
     },
     {
         icon : 'bx bxs-star',
-        name :'Quản lý trình độ'
+        name :'Quản lý trình độ',
+        router:'level.index'
     },
     {
         icon : 'bx bxs-star',
-        name :'Quản lý chuyên ngành'
+        name :'Quản lý chuyên ngành',
+        // router:'specialized.index'
     },
     {
         icon : 'bx bxs-star',
-        name :'Quản lý chức vụ'
+        name :'Quản lý chức vụ',
+        router:'position.index'
     },
     {
         icon :'bx bxs-doughnut-chart',

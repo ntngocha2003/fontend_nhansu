@@ -1,12 +1,11 @@
 <script setup>
-    import {ref,onMounted, computed} from 'vue'
+    import {ref,onMounted,onBeforeUnmount, computed} from 'vue'
     import {useStore} from 'vuex'
     import axios from '@/config/axios.js';
     const store=useStore();
     import { useRouter } from 'vue-router';
     import bus from '@/events/EventBus.js';
     import {toast} from 'vue3-toastify';
- 
     const router=useRouter();
     const {table,endpoint,model,tasks} = defineProps(['table','endpoint','model','tasks']);
 
@@ -22,16 +21,41 @@
     const selectedRow=ref([]);
 
     const renderView=async (page,query) => {
-        try {
-            page =(typeof page !=='undefined') ? page :'';
-            await store.dispatch('pagination/getData',{page:page, endpoint:endpoint,query:query});
+        try {  
+            let currentpage=page
+            let dispatchQuery=query || {}
+           
+            if(!currentpage){
+                const queryPage=router.currentRoute.value.query.page
+                currentpage=queryPage || 1
+            }
 
-            router.push({query:{page:page || '1'}})
+            if(!query){
+                dispatchQuery ={ ...router.currentRoute.value.query}
+                delete dispatchQuery.page
+            }
 
+            await store.dispatch('pagination/getData',{page:currentpage, endpoint:endpoint,query:dispatchQuery});
+
+            const hasQueryData= dispatchQuery && Object.keys(dispatchQuery).length !==0;
+            const hasPageData=currentpage !==undefined && currentpage !=='';
+
+            if(hasPageData || hasPageData){
+                const queryString={};
+                if(hasPageData){
+                    queryString.page=currentpage
+                }
+                if(hasQueryData){
+                    Object.assign(queryString,dispatchQuery)
+                }
+                router.push({query:queryString})
+                
+            }
         } catch (error) {
             console.log(error)
         }
     }
+
     const emitSearch=()=>{
         bus.on('searchTable',searchData=>{
             const searchPage=1;
@@ -39,26 +63,10 @@
         })
     }
 
-    // const deleteRow = async(id)=>{
-    //     if(window.confirm('Bạn có chắc chắc xóa dữ liệu này không ?')){
-    //            try {
-    //             console.log(156)
-    //                 const apiUrl=`${tasks.deleteId}?ids=${ids.join(',')}`
-    //                 const response=await axios.delete(apiUrl);
-    //                 await store.dispatch('pagination/deleteRows',ids)
-    //                 selectedRow.value=[]
-    //                 toast.success(response.data.message);
-                   
-    //            } catch (error) {
-    //                 console.log(error)
-    //            }
-    //        }
-    // }
-
     const deleteMultiple= async()=>{
         bus.off('delete-row'),
         bus.on('delete-row',async data=>{
-           const ids=selectedRow.value.map(index=>tableData.value[index].departmentId);
+           const ids=selectedRow.value.map(index=>tableData.value[index].id);
            if(ids.length===0){
             toast.error('Bạn chưa chọn dữ liệu để xóa')
             return
@@ -67,6 +75,7 @@
                try {
                     const apiUrl=`${tasks.deleteMultiple}?ids=${ids.join(',')}`
                     const response=await axios.delete(apiUrl);
+                   
                     await store.dispatch('pagination/deleteRows',ids)
                     selectedRow.value=[]
                     toast.success(response.data.message);
@@ -97,6 +106,9 @@
         allChecked.value=(totalRow===selectedRow.value.length)?true :false;
     }
 
+    onBeforeUnmount(() => {
+        store.dispatch('pagination/clearData');
+    }),
     onMounted(() => {
       renderView()
       emitSearch();
@@ -135,7 +147,7 @@
                                 <router-link 
                                     v-for="(action, actionKey) in table.actions"
                                     :key="actionKey"
-                                    :to="action.route + '/' + val.departmentId"
+                                    :to="action.route + '/' + val.id"
                                     :class="action.class"
                                 >
                                     <i :class="action.icon" ></i>
@@ -148,11 +160,9 @@
         </table>
         <div class="pagination">
             <ul class="uk-pagination uk-flex-center" uk-margin>
-                
                 <li v-for="(link , index) in pagination.links":key="index" :class="{'uk-active':link.active}" @click="renderView(link.label)">
-                    <span class="endpoint" v-if="(link.label !=='&laquo; Previous' && link.label !=='Next &raquo;')">{{ link.label }}</span>
+                    <span class="endpoint" v-if="(link.url !==null)">{{ link.label }}</span>
                 </li>
-
             </ul>
         </div>
     </div>
@@ -169,5 +179,18 @@
     }
     .selected-row{
         background-color: #80daa6a3 !important;
+    }
+    .uk-table td {
+        padding: 10px 12px;
+    }
+    .uk-table th{
+        text-transform: none;
+        color: #fff;
+        font-weight: 600;
+        font-size: 16px;
+        border-right: 1px solid;
+    }
+    .set-color{
+        background: #90caf9ab;
     }
 </style>

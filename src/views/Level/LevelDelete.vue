@@ -10,29 +10,29 @@
   const router=useRouter();
   const store=useStore();
 
-  const itemTitle= ref('Xóa phòng ban')
+  const itemTitle= ref('Xóa trình độ')
 
-  const endpoint=ref('/department/delete/')
+  const endpoint=ref('/level/delete/')
 
   const formDelete=ref({})
 
-  const redirect=ref('department.index')
+  const redirect=ref('level.index')
 
-  const getDepartment=async()=>{
+  const getlevel=async()=>{
     const id=router.currentRoute.value.params.id
     try {
-        const response=await axios.get('/department/' + id)
+        const response=await axios.get('/level/' + id)
         formDelete.value=response.data.data
     } catch (error) {
         if(error.response.status===404){
-            router.push({name:'department.index'})
+            router.push({name:'level.index'})
         }
         console.log(error)
     }
   }
 
   onMounted(() => {
-    getDepartment();
+    getlevel();
     })
 </script>
 

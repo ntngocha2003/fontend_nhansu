@@ -6,7 +6,7 @@
     import bus from '@/events/EventBus.js';
     
 
-    const perpage=ref(1);
+    const perpage=ref(10);
     const keyword=ref('');
 
     const search=()=>{
@@ -22,8 +22,9 @@
         <form action="" method=""@submit.prevent="search()">
             <div class="uk-flex uk-flex-middle uk-flex-between from-container">
                 <select class="select-page uk-select uk-textarea" v-model="perpage">
-                    <option value="5">5 bản ghi</option>
                     <option value="10">10 bản ghi</option>
+                    <option value="5">5 bản ghi</option>
+                    <option value="1">1 bản ghi</option>
                 </select>
                 <div class="filter-action">
                     <div class="uk-flex">

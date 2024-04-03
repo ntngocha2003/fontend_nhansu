@@ -1,7 +1,7 @@
 <script setup>
     import axios from 'axios'
     import { useRouter } from 'vue-router';
-    const {endpoint,department,redirect} = defineProps(['endpoint','department','redirect']);
+    const {endpoint,formDelete,redirect} = defineProps(['endpoint','formDelete','redirect']);
     const router=useRouter()
     import {useStore} from 'vuex'
     const store=useStore();
@@ -51,7 +51,7 @@
                                 </div>
                                 <input 
                                 type="text"
-                                v-model="department.nameDepartment"
+                                v-model="formDelete.name"
                                 class="uk-input input-content"
                                 readonly
                                 />

@@ -41,7 +41,7 @@ onMounted (()=>{
   
 <style scoped>
     .app-sidebar{
-        height:100%;
+        height:150%;
         width: 240px;
         background: #111c43;
         color:#a3aed1;

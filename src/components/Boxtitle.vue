@@ -22,11 +22,6 @@
                             <i class="bx bxs-trash-alt"></i>
                             <span>Xóa tùy chọn</span>
                         </div>
-
-                        <!-- <div class="uk-flex uk-flex-middle btn-delete" @click="">
-                            <i class="bx bxs-trash-alt"></i>
-                            <span>Xóa toàn bộ</span>
-                        </div> -->
                     </li>               
                 </ul>               
             </div>

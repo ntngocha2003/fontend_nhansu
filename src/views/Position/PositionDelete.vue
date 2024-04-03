@@ -10,22 +10,22 @@
   const router=useRouter();
   const store=useStore();
 
-  const itemTitle= ref('Xóa phòng ban')
+  const itemTitle= ref('Xóa chức vụ')
 
-  const endpoint=ref('/department/delete/')
+  const endpoint=ref('/position/delete/')
 
   const formDelete=ref({})
 
-  const redirect=ref('department.index')
+  const redirect=ref('position.index')
 
   const getDepartment=async()=>{
     const id=router.currentRoute.value.params.id
     try {
-        const response=await axios.get('/department/' + id)
+        const response=await axios.get('/position/' + id)
         formDelete.value=response.data.data
     } catch (error) {
         if(error.response.status===404){
-            router.push({name:'department.index'})
+            router.push({name:'position.index'})
         }
         console.log(error)
     }
