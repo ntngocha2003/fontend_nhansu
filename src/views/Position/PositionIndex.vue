@@ -4,7 +4,8 @@
   import Boxtitle from '@/components/Boxtitle.vue'
   import BoxFilter from '@/components/BoxFilter.vue'
   import Table from '@/components/Table.vue'
-  import {ref} from 'vue'
+  import axios, { cancelPendingRequest } from '@/config/axios'
+  import {ref,onBeforeUnmount} from 'vue'
  
   const itemTitle= ref('Quản lý chức vụ')
   const boxTitle= ref('Danh sách chức vụ')
@@ -38,6 +39,10 @@
   const tasks=ref({
     deleteMultiple:'/position/deleteMultiple',
     deleteId:'/position/delete'
+  })
+
+  onBeforeUnmount(()=>{
+    cancelPendingRequest(axios.defaults);
   })
 
 </script>

@@ -1,6 +1,6 @@
 <script setup>
-  import axios from '@/config/axios.js';
-  import {ref,onMounted} from 'vue'
+  import axios, { cancelPendingRequest } from '@/config/axios'
+  import {ref,onMounted,onBeforeUnmount} from 'vue'
   import Layout from '@/components/Layout.vue'
   import Breadcrumb from '@/components/Breadcrumb.vue'
   import DeleteForm from '@/components/DeleteForm.vue'
@@ -34,6 +34,7 @@
   onMounted(() => {
     getDepartment();
     })
+
 </script>
 
 <template>

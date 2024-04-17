@@ -18,9 +18,13 @@ import LevelIndex from '@/views/Level/LevelIndex.vue'
 import LevelStore from '@/views/Level/LevelStore.vue'
 import LevelDelete from '@/views/Level/LevelDelete.vue'
 
-// import SpecializedIndex from '@/views/Specialized/SpecializedIndex.vue'
-// import SpecializedStore from '@/views/Specialized/SpecializedStore.vue'
-// import SpecializedDelete from '@/views/Specialized/SpecializedDelete.vue'
+import SpecializedIndex from '@/views/Specialized/SpecializedIndex.vue'
+import SpecializedStore from '@/views/Specialized/SpecializedStore.vue'
+import SpecializedDelete from '@/views/Specialized/SpecializedDelete.vue'
+
+import SalaryIndex from '@/views/Salary/SalaryIndex.vue'
+import SalaryStore from '@/views/Salary/SalaryStore.vue'
+import SalaryDelete from '@/views/Salary/SalaryDelete.vue'
 
 // import EmployeeDelete from '@/views/Employee/EmployeeDelete.vue'
 // import EmployeeIndex from '@/views/Employee/EmployeeIndex.vue'
@@ -56,10 +60,17 @@ const router = createRouter({
 
     // Specialized
 
-    // {path: '/specialized/index',name: 'specialized.index',component: SpecializedIndex,meta: {middleware:[authMiddleware]}},
-    // {path: '/specialized/create',name: 'specialized.create',component: SpecializedStore,meta: {middleware:[authMiddleware]}},
-    // {path: '/specialized/update/:id',name: 'specialized.update',component: SpecializedStore,meta: {middleware:[authMiddleware]}},
-    // {path: '/specialized/delete/:id',name: 'specialized.delete',component: SpecializedDelete,meta: {middleware:[authMiddleware]}},
+    {path: '/specialized/index',name: 'specialized.index',component: SpecializedIndex,meta: {middleware:[authMiddleware]}},
+    {path: '/specialized/create',name: 'specialized.create',component: SpecializedStore,meta: {middleware:[authMiddleware]}},
+    {path: '/specialized/update/:id',name: 'specialized.update',component: SpecializedStore,meta: {middleware:[authMiddleware]}},
+    {path: '/specialized/delete/:id',name: 'specialized.delete',component: SpecializedDelete,meta: {middleware:[authMiddleware]}},
+
+    // Salary
+
+    {path: '/salary/index',name: 'salary.index',component: SalaryIndex,meta: {middleware:[authMiddleware]}},
+    {path: '/salary/create',name: 'salary.create',component: SalaryStore,meta: {middleware:[authMiddleware]}},
+    {path: '/salary/update/:id',name: 'salary.update',component: SalaryStore,meta: {middleware:[authMiddleware]}},
+    {path: '/salary/delete/:id',name: 'salary.delete',component: SalaryDelete,meta: {middleware:[authMiddleware]}},
 
     // {path: '/employee/index',name: '/employee.index',component: EmployeeIndex},
 

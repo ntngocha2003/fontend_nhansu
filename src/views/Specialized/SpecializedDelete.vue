@@ -1,5 +1,5 @@
 <script setup>
-   import axios, { cancelPendingRequest } from '@/config/axios'
+  import axios, { cancelPendingRequest } from '@/config/axios'
   import {ref,onMounted,onBeforeUnmount} from 'vue'
   import Layout from '@/components/Layout.vue'
   import Breadcrumb from '@/components/Breadcrumb.vue'
@@ -10,34 +10,31 @@
   const router=useRouter();
   const store=useStore();
 
-  const itemTitle= ref('Xóa trình độ')
+  const itemTitle= ref('Xóa chuyên ngành')
 
-  const endpoint=ref('/level/delete/')
+  const endpoint=ref('/specialized/delete/')
 
   const formDelete=ref({})
 
-  const redirect=ref('level.index')
+  const redirect=ref('specialized.index')
 
-  const getlevel=async()=>{
+  const getSpecialized=async()=>{
     const id=router.currentRoute.value.params.id
     try {
-        const response=await axios.get('/level/' + id)
+        const response=await axios.get('/specialized/' + id)
         formDelete.value=response.data.data
     } catch (error) {
         if(error.response.status===404){
-            router.push({name:'level.index'})
+            router.push({name:'specialized.index'})
         }
         console.log(error)
     }
   }
 
   onMounted(() => {
-    getlevel();
+    getSpecialized();
     })
 
-    onBeforeUnmount(()=>{
-    cancelPendingRequest(axios.defaults);
-  })
 </script>
 
 <template>

@@ -6,22 +6,24 @@
   import { useRouter } from 'vue-router';
   import {useStore} from 'vuex'
   import Multiselect from '@vueform/multiselect'
-  import useDepartments from '@/services/department.js'
   import {setupDataDropbox} from '@/setups/setup.js'
   const router=useRouter();
   const store=useStore();
 
-  const itemTitle= ref('Thêm mới chức vụ')
+  const itemTitle= ref('Thêm mới mức lương')
   
   const formData=ref({
     id:'',
-    name:'',
-    description:'',
-    departmentId:'0'
+    salaryStep:'',
+    basicSalary:'',
+    coefficientsSalary:'',
+    allowanceCoefficient:''
   })
 
-    const nameError = ref('')
-    const descriptionError = ref('')
+    const stepError = ref('')
+    const basicError = ref('')
+    const coefficientsSalaryError = ref('')
+    const allowanceError = ref('')
 
     const url=router.currentRoute.value.name.split('.')
     const action=url[url.length-1]
@@ -32,46 +34,50 @@
     try {
         let response
         if(action==='update'){          
-            response=await axios.put('/position/update/'+id,formData.value)
+            response=await axios.put('/salary/update/'+id,formData.value)
         }
         else if(action==='create'){
-            response=await axios.post('/position/store/',formData.value)
+            response=await axios.post('/salary/store/',formData.value)
         }
         store.dispatch('toast/showMessage',{message:response.data.message, type:'success'})
-        router.push({name: 'position.index'})
+        router.push({name: 'salary.index'})
        
     } catch (error) {
         console.log(error)
         if(error.response.data.errors){
-            nameError.value=error.response.data.errors.name
-            descriptionError.value = error.response.data.errors.description
+            stepError.value=error.response.data.errors.salaryStep
+            basicError.value = error.response.data.errors.basicSalary
+            coefficientsSalaryError.value=error.response.data.errors.coefficientsSalary
+            allowanceError.value = error.response.data.errors.allowanceCoefficient
           }
           else{
-           nameError.value=''
-           descriptionError.value = error.response.data.message
+           stepError.value=''
+           basicError.value=''
+           coefficientsSalaryError.value=''
+           allowanceError.value = error.response.data.message
           }
     }
   }
 
   const identifyAction= async()=>{
     if(action==='update'){ 
-        itemTitle.value='Cập nhật chức vụ' 
+        itemTitle.value='Cập nhật mức lương' 
             try {
-                const response=await axios.get('/position/' +id)
-                formData.value.name=response.data.data.name
-                formData.value.description=response.data.data.description
+                const response=await axios.get('/salary/' +id)
+                formData.value.salaryStep=response.data.data.salaryStep
+                formData.value.basicSalary=response.data.data.basicSalary
+                formData.value.coefficientsSalary=response.data.data.coefficientsSalary
+                formData.value.allowanceCoefficient=response.data.data.allowanceCoefficient
             } catch (error) {
                 console.log(error)
             }    
     }
     
   }
-  const {departments,getDepartments}=useDepartments();
-
+  
 
   onMounted(()=>{
     identifyAction()
-    getDepartments()
   })
 
 </script>
@@ -90,7 +96,7 @@
                             </div>
                             <div class="panel-body">
                                 <div>
-                                    Nhập thông tin chức vụ
+                                    Nhập thông tin mức lương
                                 </div>
                                 <div>
                                     Lưu ý những trường có dấu 
@@ -105,50 +111,61 @@
                                         <div class="uk-width-1-2@m uk-first">
                                             <div class="form-row">
                                                 <div class="label">
-                                                    Nhập tên chức vụ (*)
+                                                    Nhập bậc lương (*)
                                                 </div>
                                             </div>
                                             <input 
                                             type="text"
-                                            v-model="formData.name"
+                                            v-model="formData.salaryStep"
                                             class="uk-input input-content"
                                             />
-                                            <div v-if="nameError" class="uk-text-danger">{{'*'+ nameError }}</div>
+                                            <div v-if="stepError" class="uk-text-danger">{{'*'+ stepError }}</div>
                                         </div>
     
                                         <div class="uk-width-1-2@m">
                                             <div class="form-row">
                                                 <div class="label">
-                                                    Nhập mô tả chức vụ (*)
+                                                    Nhập lương cơ bản (*)
                                                 </div>
                                             </div>
                                             <input 
                                             type="text"
-                                            v-model="formData.description"
+                                            v-model="formData.basicSalary"
                                             class="uk-input input-content"
                                             />
-                                            <div v-if="descriptionError" class="uk-text-danger">{{'*'+ descriptionError }}</div>
+                                            <div v-if="basicError" class="uk-text-danger">{{'*'+ basicError }}</div>
                                         </div>
                                     </div>
                                     <div uk-gird class="list-content gird" >
                                         <div class="uk-width-1-2@m uk-first">
-                                            <div class="">
+                                            <div class="form-row">
                                                 <div class="label">
-                                                    Chọn phòng ban (*)
-                                                    <Multiselect
-                                                        v-model="formData.departmentId"
-                                                        :options="setupDataDropbox(departments,'Chọn phòng ban')"
-                                                        :searchable="true"
-                                                        >
-                                                    </Multiselect>
+                                                    Nhập hệ số lương (*)
                                                 </div>
                                             </div>
-                                           
-                                            <!-- <div v-if="nameError" class="uk-text-danger">{{'*'+ nameError }}</div> -->
+                                            <input 
+                                            type="text"
+                                            v-model="formData.coefficientsSalary"
+                                            class="uk-input input-content"
+                                            />
+                                            <div v-if="coefficientsSalaryError" class="uk-text-danger">{{'*'+ coefficientsSalaryError }}</div>
                                         </div>
     
-                                        
+                                        <div class="uk-width-1-2@m">
+                                            <div class="form-row">
+                                                <div class="label">
+                                                    Nhập hệ số phụ cấp (*)
+                                                </div>
+                                            </div>
+                                            <input 
+                                            type="text"
+                                            v-model="formData.allowanceCoefficient	"
+                                            class="uk-input input-content"
+                                            />
+                                            <div v-if="allowanceError" class="uk-text-danger">{{'*'+ allowanceError }}</div>
+                                        </div>
                                     </div>
+                                   
                                 </div>
                                 <div class="uk-flex uk-flex-right">
                                     <button class="uk-button-primary btn-store">Lưu thông tin</button>

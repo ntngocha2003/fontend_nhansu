@@ -5,18 +5,19 @@
   import BoxFilter from '@/components/BoxFilter.vue'
   import Table from '@/components/Table.vue'
   import axios, { cancelPendingRequest } from '@/config/axios'
-  import {ref,onMounted,onBeforeUnmount} from 'vue'
+  import {ref,onBeforeUnmount} from 'vue'
  
-  const itemTitle= ref('Quản lý trình độ')
-  const boxTitle= ref('Danh sách trình độ')
+  const itemTitle= ref('Quản lý lương')
+  const boxTitle= ref('Danh sách lương')
   const boxFilter= ref({
-    createText:'Thêm mới trình độ',
-    createLink:'/level/create'
+    createText:'Thêm mới lương',
+    createLink:'/salary/create',
+    class:'none' ,
   })
   const table= ref({
     content:{
-        name:['Tên trình độ','Số nhân viên','Mô tả'],
-        value:['name','employees_count','description']
+        name:['Bậc lương','Lương cơ bản', 'Hệ số lương', 'Hệ số phụ cấp'],
+        value:['salaryStep','basicSalary','coefficientsSalary','allowanceCoefficient']
     },
     data:[],
    
@@ -24,26 +25,25 @@
         {
             class:'btn btn-warning ml10' ,
             icon:'bx bxs-calendar-edit',
-            route:'/level/update'
+            route:'/salary/update'
         },
         {
             class:'btn btn-danger ml10' ,
             icon:'bx bxs-trash',
-            route:'/level/delete'
+            route:'/salary/delete'
         }
     ]
   })
 
-  const endpoint=ref('/Levels')
-  const model=ref('Level')
+  const endpoint=ref('/Salarys')
+  const model=ref('Salary')
   const tasks=ref({
-    deleteMultiple:'/level/deleteMultiple',
-    deleteId:'/level/delete'
+    deleteMultiple:'/salary/deleteMultiple',
+    deleteId:'/salary/delete'
   })
 
   onBeforeUnmount(()=>{
     cancelPendingRequest(axios.defaults);
-    
   })
 
 </script>
@@ -67,5 +67,5 @@
 </template>
 
 <style scoped>
-    
+   
 </style>

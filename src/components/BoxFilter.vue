@@ -28,7 +28,7 @@
                 </select>
                 <div class="filter-action">
                     <div class="uk-flex">
-                        <div class="filter-search">
+                        <div class="filter-search" :class="boxFilter.class">
                             <input
                                 type="text"
                                 v-model="keyword"                             
@@ -66,5 +66,9 @@
     }
     .btn-search{
         cursor: pointer;
+    }
+
+    .none{
+        display: none;
     }
 </style>

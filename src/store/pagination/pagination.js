@@ -17,13 +17,9 @@ const mutations={
     setPagination(state,response){
         state.pagination=response
     },
-
-    setDeleteRows(state,ids){
-        state.data=state.data.filter(({id}) => !ids.includes(id))
-    },
     clearState(state){
         state.page=1
-        state.data=[]
+        state.data=null,
         state.pagination=[]
     }
 }
@@ -49,20 +45,11 @@ const actions={
         }
 
         const response =await axios.get(apiUrl)
-        console.log(response)
         commit ('setPage',page)
         commit ('setData',response.data.data.data)
         commit ('setPagination',response.data.data)
       },
-
-      async deleteRows({commit},ids){
-        try {
-            commit('setDeleteRows',ids)
-        } catch (error) {
-            console.log(error)
-        }
-      },
-
+      
       clearData({commit}){
         commit('clearState')
       }

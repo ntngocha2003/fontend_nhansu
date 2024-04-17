@@ -4,14 +4,16 @@
   import Boxtitle from '@/components/Boxtitle.vue'
   import BoxFilter from '@/components/BoxFilter.vue'
   import Table from '@/components/Table.vue'
-  import {ref} from 'vue'
- 
+  import {ref,onBeforeUnmount} from 'vue'
+  import axios, { cancelPendingRequest } from '@/config/axios'
+
   const itemTitle= ref('Quản lý phòng ban')
   const boxTitle= ref('Danh sách phòng ban')
   const boxFilter= ref({
     createText:'Thêm mới phòng ban',
     createLink:'/department/create'
   })
+  
   const table= ref({
     content:{
         name:['Tên phòng ban','Số nhân viên','Mô tả'],
@@ -39,6 +41,11 @@
   const tasks=ref({
     deleteMultiple:'/department/deleteMultiple',
     deleteId:'/department/delete'
+  })
+
+  onBeforeUnmount(()=>{
+    cancelPendingRequest(axios.defaults);
+    
   })
 
 </script>

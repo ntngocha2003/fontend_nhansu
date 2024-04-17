@@ -5,17 +5,17 @@
   import BoxFilter from '@/components/BoxFilter.vue'
   import Table from '@/components/Table.vue'
   import axios, { cancelPendingRequest } from '@/config/axios'
-  import {ref,onMounted,onBeforeUnmount} from 'vue'
+  import {ref,onBeforeUnmount} from 'vue'
  
-  const itemTitle= ref('Quản lý trình độ')
-  const boxTitle= ref('Danh sách trình độ')
+  const itemTitle= ref('Quản lý chuyên ngành')
+  const boxTitle= ref('Danh sách chuyên ngành')
   const boxFilter= ref({
-    createText:'Thêm mới trình độ',
-    createLink:'/level/create'
+    createText:'Thêm mới chuyên ngành',
+    createLink:'/specialized/create'
   })
   const table= ref({
     content:{
-        name:['Tên trình độ','Số nhân viên','Mô tả'],
+        name:['Tên chuyên ngành','Số nhân viên','Mô tả'],
         value:['name','employees_count','description']
     },
     data:[],
@@ -24,26 +24,21 @@
         {
             class:'btn btn-warning ml10' ,
             icon:'bx bxs-calendar-edit',
-            route:'/level/update'
+            route:'/specialized/update'
         },
         {
             class:'btn btn-danger ml10' ,
             icon:'bx bxs-trash',
-            route:'/level/delete'
+            route:'/specialized/delete'
         }
     ]
   })
 
-  const endpoint=ref('/Levels')
-  const model=ref('Level')
+  const endpoint=ref('/Specializeds')
+  const model=ref('Specialized')
   const tasks=ref({
-    deleteMultiple:'/level/deleteMultiple',
-    deleteId:'/level/delete'
-  })
-
-  onBeforeUnmount(()=>{
-    cancelPendingRequest(axios.defaults);
-    
+    deleteMultiple:'/specialized/deleteMultiple',
+    deleteId:'/specialized/delete'
   })
 
 </script>

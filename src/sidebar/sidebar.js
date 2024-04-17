@@ -15,7 +15,7 @@ const sidebar=[
     {
         icon : 'bx bxs-star',
         name :'Quản lý chuyên ngành',
-        // router:'specialized.index'
+        router:'specialized.index'
     },
     {
         icon : 'bx bxs-star',
@@ -29,7 +29,8 @@ const sidebar=[
     },
     {
         icon : 'bx bxs-heart',
-        name :'Quản lý lương'
+        name :'Quản lý lương',
+        router:'salary.index'
     }
 ];
 export default sidebar;

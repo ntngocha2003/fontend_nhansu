@@ -5,14 +5,19 @@
   import Breadcrumb from '@/components/Breadcrumb.vue'
   import { useRouter } from 'vue-router';
   import {useStore} from 'vuex'
-
+  import Multiselect from '@vueform/multiselect'
+  import useLevels from '@/services/level.js'
+  import {setupDataDropbox} from '@/setups/setup.js'
   const router=useRouter();
   const store=useStore();
 
-  const itemTitle= ref('Thêm mới phòng ban')
+  const itemTitle= ref('Thêm mới chuyên ngành')
+  
   const formData=ref({
+    id:'',
     name:'',
-    description:''
+    description:'',
+    levelId:'0'
   })
 
     const nameError = ref('')
@@ -22,17 +27,18 @@
     const action=url[url.length-1]
     const id=router.currentRoute.value.params.id;
    
+
   const save = async()=>{
     try {
         let response
         if(action==='update'){          
-            response=await axios.put('/department/update/'+id,formData.value)
+            response=await axios.put('/specialized/update/'+id,formData.value)
         }
         else if(action==='create'){
-            response=await axios.post('/department/store/',formData.value)
+            response=await axios.post('/specialized/store/',formData.value)
         }
         store.dispatch('toast/showMessage',{message:response.data.message, type:'success'})
-        router.push({name: 'department.index'})
+        router.push({name: 'specialized.index'})
        
     } catch (error) {
         console.log(error)
@@ -49,9 +55,9 @@
 
   const identifyAction= async()=>{
     if(action==='update'){ 
-        itemTitle.value='Cập nhật phòng ban' 
+        itemTitle.value='Cập nhật chuyên ngành' 
             try {
-                const response=await axios.get('/department/' +id)
+                const response=await axios.get('/specialized/' +id)
                 formData.value.name=response.data.data.name
                 formData.value.description=response.data.data.description
             } catch (error) {
@@ -60,12 +66,12 @@
     }
     
   }
+  const {levels,getLevels}=useLevels();
+
+
   onMounted(()=>{
     identifyAction()
-  })
-
-  onBeforeUnmount(()=>{
-    cancelPendingRequest(axios.defaults);
+    getLevels()
   })
 
 </script>
@@ -84,7 +90,7 @@
                             </div>
                             <div class="panel-body">
                                 <div>
-                                    Nhập thông tin phòng ban
+                                    Nhập thông tin chuyên ngành
                                 </div>
                                 <div>
                                     Lưu ý những trường có dấu 
@@ -99,7 +105,7 @@
                                         <div class="uk-width-1-2@m uk-first">
                                             <div class="form-row">
                                                 <div class="label">
-                                                    Nhập tên phòng ban (*)
+                                                    Nhập tên chuyên ngành (*)
                                                 </div>
                                             </div>
                                             <input 
@@ -113,7 +119,7 @@
                                         <div class="uk-width-1-2@m">
                                             <div class="form-row">
                                                 <div class="label">
-                                                    Nhập mô tả phòng ban (*)
+                                                    Nhập mô tả chuyên ngành (*)
                                                 </div>
                                             </div>
                                             <input 
@@ -123,6 +129,25 @@
                                             />
                                             <div v-if="descriptionError" class="uk-text-danger">{{'*'+ descriptionError }}</div>
                                         </div>
+                                    </div>
+                                    <div uk-gird class="list-content gird" >
+                                        <div class="uk-width-1-2@m uk-first">
+                                            <div class="">
+                                                <div class="label">
+                                                    Chọn trình độ (*)
+                                                    <Multiselect
+                                                        v-model="formData.levelId"
+                                                        :options="setupDataDropbox(levels,'Chọn trình độ')"
+                                                        :searchable="true"
+                                                        >
+                                                    </Multiselect>
+                                                </div>
+                                            </div>
+                                           
+                                            <!-- <div v-if="nameError" class="uk-text-danger">{{'*'+ nameError }}</div> -->
+                                        </div>
+    
+                                        
                                     </div>
                                 </div>
                                 <div class="uk-flex uk-flex-right">
@@ -137,6 +162,4 @@
   </Layout>
 </template>
 
-<style scoped>
-    
-</style>
+<style src="@vueform/multiselect/themes/default.css"></style>
