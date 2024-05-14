@@ -26,10 +26,11 @@ import SalaryIndex from '@/views/Salary/SalaryIndex.vue'
 import SalaryStore from '@/views/Salary/SalaryStore.vue'
 import SalaryDelete from '@/views/Salary/SalaryDelete.vue'
 
-// import EmployeeDelete from '@/views/Employee/EmployeeDelete.vue'
-// import EmployeeIndex from '@/views/Employee/EmployeeIndex.vue'
-// import EmployeeStore from '@/views/Employee/EmployeeStore.vue'
-// import EmployeeUpdate from '@/views/Employee/EmployeeUpdate.vue'
+import EmployeeDelete from '@/views/Employee/EmployeeDelete.vue'
+import EmployeeIndex from '@/views/Employee/EmployeeIndex.vue'
+import EmployeeStore from '@/views/Employee/EmployeeStore.vue'
+import Detail from '@/views/Employee/Detail.vue'
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -72,19 +73,13 @@ const router = createRouter({
     {path: '/salary/update/:id',name: 'salary.update',component: SalaryStore,meta: {middleware:[authMiddleware]}},
     {path: '/salary/delete/:id',name: 'salary.delete',component: SalaryDelete,meta: {middleware:[authMiddleware]}},
 
-    // {path: '/employee/index',name: '/employee.index',component: EmployeeIndex},
+    // Employee
 
-    // {
-    //   path: '/employee/store',name: '/employee.store',component: EmployeeStore
-    // },
-
-    // {
-    //   path: '/employee/update',name: '/employee.update',component: EmployeeUpdate
-    // },
-
-    // {
-    //   path: '/employee/delete',name: '/employee.delete',component: EmployeeDelete
-    // }
+    {path: '/employee/index',name: 'employee.index',component: EmployeeIndex,meta: {middleware:[authMiddleware]}},
+    {path: '/employee/create',name: 'employee.create',component: EmployeeStore,meta: {middleware:[authMiddleware]}},
+    {path: '/employee/update/:id',name: 'employee.update',component: EmployeeStore,meta: {middleware:[authMiddleware]}},
+    {path: '/employee/delete/:id',name: 'employee.delete',component: EmployeeDelete,meta: {middleware:[authMiddleware]}},
+    {path: '/employee/detail/:id',name: 'employee.detail',component: Detail,meta: {middleware:[authMiddleware]}}
   ]
 })
 

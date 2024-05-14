@@ -1,14 +1,11 @@
 <script setup>
     import {ref,onMounted,onBeforeUnmount, computed} from 'vue'
     import {useStore} from 'vuex'
-    import axios from '@/config/axios.js';
     const store=useStore();
     import { useRouter } from 'vue-router';
     import bus from '@/events/EventBus.js';
-    import {toast} from 'vue3-toastify';
     const router=useRouter();
     const {table,endpoint,model,tasks} = defineProps(['table','endpoint','model','tasks']);
-
     const tableData=computed(()=>{
         return store.getters['pagination/getData']      
     })
@@ -54,6 +51,7 @@
     }
 
     const emitSearch=()=>{
+        
         bus.on('searchTable',searchData=>{
             const searchPage=1;
             
@@ -63,7 +61,7 @@
 
     onBeforeUnmount(() => {
         store.dispatch('pagination/clearData');
-        location.reload();
+        // location.reload();
     }),
     
     onMounted(() => {

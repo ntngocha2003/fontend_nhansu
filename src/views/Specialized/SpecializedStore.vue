@@ -6,7 +6,7 @@
   import { useRouter } from 'vue-router';
   import {useStore} from 'vuex'
   import Multiselect from '@vueform/multiselect'
-  import useLevels from '@/services/level.js'
+  import {useLevels} from '@/services/level.js'
   import {setupDataDropbox} from '@/setups/setup.js'
   const router=useRouter();
   const store=useStore();

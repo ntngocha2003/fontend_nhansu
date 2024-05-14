@@ -32,7 +32,7 @@ const getters={
 
 const actions={
     async getData ({commit},{page,endpoint,query}) {
-        // await csrf.getCookie();
+       
         let apiUrl=endpoint;
 
         if(page !=='' && page !==undefined){

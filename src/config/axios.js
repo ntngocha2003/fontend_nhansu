@@ -7,6 +7,7 @@ axios.interceptors.request.use(
         if(token){
             config.headers.Authorization=`Bearer ${token}`
         }
+        // config.headers['Cache-Control'] = 'no-cache';
         const cancelTokenSource=axios.CancelToken.source();    
         config.cancelToken=cancelTokenSource.token
         config.cancelTokenSource=cancelTokenSource

@@ -5,7 +5,8 @@ const sidebar=[
     },
     {
         icon : 'bx bxs-user',
-        name :'Quản lý nhân viên'
+        name :'Quản lý nhân viên',
+        router:'employee.index'
     },
     {
         icon : 'bx bxs-star',

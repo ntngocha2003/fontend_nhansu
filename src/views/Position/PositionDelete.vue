@@ -18,7 +18,7 @@
 
   const redirect=ref('position.index')
 
-  const getDepartment=async()=>{
+  const getPosition=async()=>{
     const id=router.currentRoute.value.params.id
     try {
         const response=await axios.get('/position/' + id)
@@ -32,7 +32,7 @@
   }
 
   onMounted(() => {
-    getDepartment();
+    getPosition();
     })
 
 </script>

@@ -1,7 +1,7 @@
 import {ref} from 'vue'
 import axios from '@/config/axios'
 
-export default function useLevels(){
+export const useLevels=()=>{
     const levels =ref({})
 
     const getLevels=async ()=>{
@@ -15,4 +15,17 @@ export default function useLevels(){
     }
 
     return { levels, getLevels}
+}
+export const fetchSpecialized=async(id,relation)=>{
+    try {
+        const response=await axios.get('/specializeds',{
+            params:{
+                id:id,
+                relation:relation
+            }
+        })
+        return response.data.data;
+    } catch (error) {
+        console.log(error)
+    }
 }
